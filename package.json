@@ -1,8 +1,11 @@
 {
-  "name": "gatsby-starter-default",
-  "description": "Gatsby default starter",
+  "name": "perfect-pitch",
+  "description": "Web app to develop your pitch",
   "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Vlad Khitev <vkhitev@gmail.com>",
+  "contributors": [
+    "Ivan Romanchuk <ivan.rmnchk@gmail.com>"
+  ],
   "dependencies": {
     "gatsby": "^1.9.199",
     "gatsby-link": "^1.6.37",
@@ -10,17 +13,36 @@
     "react-helmet": "^5.2.0"
   },
   "keywords": [
-    "gatsby"
+    "music",
+    "pitch",
+    "web"
   ],
   "license": "MIT",
   "main": "n/a",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "prettier-standard \"src/**/*.js\"",
+    "lint": "standard --verbose \"src/**/*.js\" | snazzy",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "precommit": "lint-staged"
   },
   "devDependencies": {
-    "prettier": "^1.10.2"
+    "babel-eslint": "^8.2.1",
+    "husky": "^0.14.3",
+    "prettier-standard": "^8.0.0",
+    "snazzy": "^7.0.0",
+    "standard": "^10.0.3"
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  },
+  "lint-staged": {
+    "linters": {
+      "src/**/*.js": [
+        "prettier-standard",
+        "git add"
+      ]
+    }
   }
 }
