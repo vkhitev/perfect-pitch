@@ -5,7 +5,7 @@ import centered from '@storybook/addon-centered';
 
 import Exercise from 'containers/Exercise';
 
-import themeProvider from './themeProvider';
+import themeProvider from './util/themeProvider';
 
 const intervals3 = [
   {
@@ -57,7 +57,7 @@ const intervals8 = [
   },
 ];
 
-storiesOf('Full', module)
+storiesOf('Exercise', module)
   .addDecorator(themeProvider)
   .addDecorator(centered)
   .add('Intervals 3', () => (

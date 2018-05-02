@@ -6,8 +6,8 @@ import {Route, Switch} from 'react-router-dom';
 import Header from 'components/Layout/TopBar';
 import Footer from 'components/Layout/Footer';
 import NotFound from 'components/NotFound';
+import Dashboard from 'components/Dashboard';
 
-import Dashboard from 'containers/Dashboard';
 import SignUp from 'containers/SignUp';
 import LogIn from 'containers/LogIn';
 import RestorePassword from 'containers/RestorePassword';
