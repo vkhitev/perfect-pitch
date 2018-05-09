@@ -41,13 +41,20 @@ rules:
       jsxBracketSameLine: false
       arrowParens: avoid
 
-  import/no-extraneous-dependencies:
-    - error
-    - devDependencies:
-      - src/stories/*.{js,jsx}
+  import/prefer-default-export: off
 
   no-underscore-dangle: off
 
+  # Allow dev-dependencies in stories and test files
+  import/no-extraneous-dependencies:
+    - error
+    - devDependencies:
+      - storybook/**/*
+      - src/stories/**/*.{js,jsx}
+      - src/setupTests.js
+      - src/**/*.test.{js,jsx}
+
+  # Workaround for react-router Link
   jsx-a11y/anchor-is-valid:
     - error
     - components:

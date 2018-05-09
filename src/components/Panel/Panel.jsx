@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Paper from 'material-ui/Paper';
 
 const Panel = styled(Paper)`
-  width: 340px;
+  width: ${props => props.width || '340px'};
   padding: 30px;
   margin: 0 20px;
 

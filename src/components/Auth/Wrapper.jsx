@@ -1,12 +1,3 @@
-import styled from 'styled-components';
-import Grid from 'material-ui/Grid';
+import Background from 'components/Background';
 
-const Wrapper = styled(Grid).attrs({
-  container: true,
-  justify: 'center',
-})`
-  margin-top: 100px;
-  margin-bottom: 40px;
-`;
-
-export default Wrapper;
+export default Background;

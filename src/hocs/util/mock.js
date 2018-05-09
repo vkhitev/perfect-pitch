@@ -1,10 +1,9 @@
 import {lifecycle} from 'recompose';
-import {map} from 'ramda';
 
-const withMock = (shape, timeout = 1000) =>
+const withMock = (defaultValue, shape, timeout = 1000) =>
   lifecycle({
     componentWillMount() {
-      this.setState(map(() => undefined, shape));
+      this.setState(defaultValue);
       setTimeout(() => {
         this.setState(shape);
       }, timeout);

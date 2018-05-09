@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Grid from 'material-ui/Grid';
+import Backgorund from 'components/Background';
 
-import Panel from 'components/Panel/Panel';
-import Header from 'components/Panel/Header';
-
+import SkillsPanel from './SkillsPanel';
 import ProgressPanel from './ProgressPanel';
 import ContactsPanel from './ContactsPanel';
 
@@ -14,17 +13,17 @@ const Wrapper = styled.div`
 `;
 
 const Dashboard = () => (
-  <Wrapper>
-    <Grid container justify="center">
-      <Panel>
-        <Header>Kek</Header>
-      </Panel>
-      <div>
-        <ProgressPanel />
-        <ContactsPanel />
-      </div>
-    </Grid>
-  </Wrapper>
+  <Backgorund>
+    <Wrapper>
+      <Grid container justify="center">
+        <SkillsPanel />
+        <div>
+          <ProgressPanel />
+          <ContactsPanel />
+        </div>
+      </Grid>
+    </Wrapper>
+  </Backgorund>
 );
 
 export default Dashboard;

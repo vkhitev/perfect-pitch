@@ -1,10 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, {css, keyframes} from 'styled-components';
 import {Link} from 'react-router-dom';
 import {GridListTile} from 'material-ui/GridList';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
+
+const shadow = keyframes`
+  0% {
+    box-shadow: 0 0 20px #ba8b00;
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  }
+  100% {
+    box-shadow: 0 0 20px #ba8b00;
+  }
+`;
 
 const Card = styled.div`
   padding: 33px 20px 20px;
@@ -12,6 +24,11 @@ const Card = styled.div`
   margin: 15px;
   position: relative;
   text-align: center;
+  ${props =>
+    props.highlight &&
+    css`
+      animation: ${shadow} 2s 98765432;
+    `};
 `;
 
 const CompletedBadge = styled.span`
@@ -52,7 +69,7 @@ function getSkillStatus(props) {
 
 const SkillCard = props => (
   <GridListTile>
-    <Card>
+    <Card highlight={props.highlight}>
       {props.completed && <CompletedBadge />}
       <Title>{props.title}</Title>
       <Description>{props.description}</Description>
@@ -75,6 +92,11 @@ SkillCard.propTypes = {
   description: PropTypes.string.isRequired,
   locked: PropTypes.bool.isRequired,
   link: PropTypes.string.isRequired,
+  highlight: PropTypes.bool,
+};
+
+SkillCard.defaultProps = {
+  highlight: false,
 };
 
 export default SkillCard;

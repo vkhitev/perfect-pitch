@@ -1,6 +1,7 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import {ConnectedRouter} from 'react-router-redux';
+import {ThemeProvider} from 'styled-components';
 import CssBaseline from 'material-ui/CssBaseline';
 import {
   createGenerateClassName,
@@ -22,10 +23,12 @@ export default () => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <JssProvider jss={jss} generateClassName={generateClassName}>
-        <MuiThemeProvider theme={theme}>
-          <CssBaseline />
-          <App />
-        </MuiThemeProvider>
+        <ThemeProvider theme={theme}>
+          <MuiThemeProvider theme={theme}>
+            <CssBaseline />
+            <App />
+          </MuiThemeProvider>
+        </ThemeProvider>
       </JssProvider>
     </ConnectedRouter>
   </Provider>

@@ -25,6 +25,7 @@ firestore.settings(firestoreSettings);
 const config = {
   userProfile: 'users',
   enableLogging: false,
+  useFirestoreForProfile: true,
 };
 
 export default compose(
