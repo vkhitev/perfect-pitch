@@ -4,6 +4,8 @@ import scales from './data/scales';
 import chordProgressions from './data/chordProgressions';
 import perfectPitch from './data/perfectPitch';
 
+import './details';
+
 const exerciseCollection = {
   intervals: {
     title: 'Intervals',

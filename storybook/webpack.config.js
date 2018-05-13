@@ -1,5 +1,3 @@
-const path = require('path');
-
 module.exports = (baseConfig, env, defaultConfig) => {
   defaultConfig.module.rules.unshift({
     test: /.jsx?$/,
@@ -10,7 +8,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
         plugins: ['babel-plugin-rewire'],
       },
     },
-  })
+  });
 
   return defaultConfig;
 };

@@ -5,7 +5,8 @@ import Paper from 'material-ui/Paper';
 
 import PanelHeader from 'components/Panel/Header';
 import withMock from 'hocs/util/mock';
-import skillPreviews from 'fake/previews';
+import skillPreviews, {labels} from 'fake/previews';
+import details from 'exercise/details';
 
 import SkillRow from './SkillRow';
 import SkillPreview, {colors} from './SkillPreview';
@@ -36,10 +37,11 @@ const SkillsPanel = ({skillPreviews}) => (
           {row.levelItems.map(item => (
             <SkillPreview
               key={item.id}
-              label={item.label}
+              label={labels[item.category]}
               locked={row.locked}
-              color={genColor(item.label)}
+              color={genColor(labels[item.category])}
               progress={item.progress}
+              icon={details[item.category].icon}
               to={`/skill/${item.category}?ex=${item.id}`}
             />
           ))}

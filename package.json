@@ -15,6 +15,7 @@
     "react-dom": "^16.3.2",
     "react-google-button": "^0.5.3",
     "react-jss": "^8.4.0",
+    "react-markdown": "^3.3.2",
     "react-redux": "^5.0.7",
     "react-redux-firebase": "^2.0.6",
     "react-router-dom": "^4.2.2",
@@ -22,9 +23,11 @@
     "react-scripts": "1.1.4",
     "recompose": "^0.27.0",
     "redux": "^4.0.0",
+    "redux-actions": "^2.3.2",
     "redux-auth-wrapper": "^2.0.2",
     "redux-firestore": "^0.4.3",
     "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1",
     "styled-components": "^3.2.6"
   },
   "lint-staged": {
@@ -50,16 +53,22 @@
     "@storybook/addon-links": "^3.4.3",
     "@storybook/addons": "^3.4.3",
     "@storybook/react": "^3.4.3",
+    "@types/jest": "^22.2.3",
     "@types/storybook__react": "^3.0.7",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-rewire": "^1.1.0",
     "babel-runtime": "^6.26.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
     "husky": "^0.14.3",
+    "jest-styled-components": "^5.0.1",
     "lint-staged": "^7.0.5",
-    "prettier": "^1.12.1"
+    "prettier": "^1.12.1",
+    "react-test-renderer": "^16.3.2",
+    "source-map-explorer": "^1.5.0"
   }
 }

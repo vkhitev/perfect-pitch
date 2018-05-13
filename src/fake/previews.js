@@ -1,3 +1,17 @@
+export const complexities = {
+  basic: 'Basic',
+  advanced: 'Advanced',
+  expert: 'Expert',
+};
+
+export const labels = {
+  intervals: 'Intervals',
+  chords: 'Chords',
+  scales: 'Scales',
+  'chord-progressions': 'Chord Progressions',
+  'perfect-pitch': 'Perfect Pitch',
+};
+
 export default [
   {
     level: 1,
@@ -5,9 +19,8 @@ export default [
       {
         id: 'intervals-1-1',
         category: 'intervals',
-        label: 'Intervals',
+        complexity: 'BASIC',
         progress: 1,
-        icon: '',
       },
     ],
   },
@@ -17,23 +30,20 @@ export default [
       {
         id: 'chords-1-1',
         category: 'chords',
-        label: 'Chords',
+        complexity: 'BASIC',
         progress: 0.4,
-        icon: '',
       },
       {
         id: 'scales-1-1',
         category: 'scales',
-        label: 'Scales',
+        complexity: 'BASIC',
         progress: 0.68,
-        icon: '',
       },
       {
         id: 'chord-progressions-1-1',
         category: 'chord-progressions',
-        label: 'Chord Progressions',
+        complexity: 'BASIC',
         progress: 0.2,
-        icon: '',
       },
     ],
   },
@@ -44,16 +54,14 @@ export default [
       {
         id: 'intervals-1-2',
         category: 'intervals',
-        label: 'Intervals',
+        complexity: 'BASIC',
         progress: 0,
-        icon: '',
       },
       {
         id: 'scales-1-2',
         category: 'scales',
-        label: 'Scales',
+        complexity: 'BASIC',
         progress: 0,
-        icon: '',
       },
     ],
   },
@@ -64,9 +72,26 @@ export default [
       {
         id: 'perfect-pitch-1-2',
         category: 'perfect-pitch',
-        label: 'Perfect Pitch',
+        complexity: 'BASIC',
         progress: 0,
-        icon: '',
+      },
+    ],
+  },
+  {
+    level: 5,
+    locked: true,
+    levelItems: [
+      {
+        id: 'perfect-pitch-1-3',
+        category: 'perfect-pitch',
+        complexity: 'BASIC',
+        progress: 0,
+      },
+      {
+        id: 'scales-1-3',
+        category: 'scales',
+        complexity: 'BASIC',
+        progress: 0,
       },
     ],
   },

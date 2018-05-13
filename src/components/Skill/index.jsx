@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {compose, mapProps, withProps} from 'recompose';
+import {compose, mapProps, lifecycle, withState, withProps} from 'recompose';
 import qs from 'qs';
-import {pipe, pluck, map, values, sum, length} from 'ramda';
+import {pipe, pluck, map, values, sum, length, chain} from 'ramda';
+import ReactMarkdown from 'react-markdown';
 import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
 
 import Background from 'components/Background';
-import {categories} from 'constants/human';
+import details from 'exercise/details';
+import previews, {complexities} from 'fake/previews';
 
 import SkillCard from './SkillCard';
 import SkillContainer from './SkillContainer';
@@ -18,97 +21,63 @@ const SkillPaper = styled(Paper)`
   margin: 40px auto;
 `;
 
-const progress = {
-  completedExercises: {
-    intervals: {
-      'intervals-1': {
-        'intervals-1-1': true,
-        'intervals-1-2': true,
-      },
-    },
-  },
-  openSkills: {
-    intervals: {
-      'intervals-1': true,
-    },
-  },
-};
-
-const completed = progress.completedExercises.intervals;
-const open = progress.openSkills.intervals;
-
-const skills = {
-  title: 'Intervals',
-  levels: {
-    'intervals-1': {
-      title: 'Basic',
-      exercises: {
-        'intervals-1-1': {
-          title: 'Level 1',
-          description: 'Description 1',
-        },
-        'intervals-1-2': {
-          title: 'Level 1',
-          description: 'Description 1',
-        },
-        'intervals-1-3': {
-          title: 'Level 1',
-          description: 'Description 1',
-        },
-      },
-    },
-    'intervals-2': {
-      title: 'Advanced',
-      exercises: {
-        'intervals-2-1': {
-          title: 'Level 1',
-          description: 'Description 1',
-        },
-        'intervals-2-2': {
-          title: 'Level 1',
-          description: 'Description 1',
-        },
-        'intervals-2-3': {
-          title: 'Level 1',
-          description: 'Description 1',
-        },
-        'intervals-2-4': {
-          title: 'Level 1',
-          description: 'Description 1',
-        },
-      },
-    },
-  },
-};
-
-const getCompletedCount = pipe(map(values), map(length), values, sum);
-
-const getTotalCount = pipe(
-  pluck('exercises'),
-  map(values),
-  map(length),
-  values,
-  sum,
-);
-
 const parseRoute = mapProps(props => ({
   category: props.match.params.category,
   highlight: qs.parse(props.location.search).ex,
   url: props.match.url,
 }));
 
-const enhance = compose(parseRoute, withProps({}));
+const enhance = compose(
+  parseRoute,
+  withProps(props => {
+    const allSkills = chain(item => item.levelItems, previews);
+    const skills = allSkills.filter(skill => skill.category === props.category);
+    return {
+      skills: skills.map(skill => ({
+        id: skill.id,
+        category: skill.category,
+        complexity: complexities[skill.complexity],
+        completed: skill.progress === 1,
+      })),
+      total: skills.length,
+      completed: skills.filter(skill => skill.progress === 1).length,
+    };
+  }),
+  withState('theory', 'setTheory', ''),
+  lifecycle({
+    async componentDidMount() {
+      const theoryResponse = await fetch(details[this.props.category].theory);
+      const theory = await theoryResponse.text();
+      this.props.setTheory(theory);
+    },
+  }),
+);
+
+const TheoryPanel = styled.div`
+  padding: 24px;
+`;
+
+const Title = styled(Typography).attrs({
+  variant: 'title',
+})`
+  color: #666;
+  margin-left: 16px;
+  margin-bottom: 24px;
+`;
 
 const SkillPage = props => (
   <Background>
     <SkillPaper>
       <SkillHeader
-        title={props.category}
-        completedCount={getCompletedCount(completed)}
-        totalCount={getTotalCount(skills.levels)}
+        title={details[props.category].name}
+        completedCount={props.completed}
+        totalCount={props.total}
         onClickPractice={() => {}}
       />
-      {Object.entries(skills.levels).map(([levelKey, levelValue]) => (
+      {/* {props.skills.map(skill => (
+        SkillContainer
+      ))} */}
+      {/* {Object.entries(skills.levels).map(([levelKey, levelValue]) => (
         <SkillContainer key={levelKey} title={levelValue.title}>
           {Object.entries(levelValue.exercises).map(
             ([exerciseKey, exerciseValue]) => (
@@ -126,13 +95,27 @@ const SkillPage = props => (
             ),
           )}
         </SkillContainer>
-      ))}
+      ))} */}
+      <TheoryPanel>
+        <Title>Theory</Title>
+        <Typography component="div" variant="body1">
+          <ReactMarkdown
+            source={props.theory}
+            renderers={{
+              heading: headingProps => (
+                <Typography variant="title" {...headingProps} />
+              ),
+            }}
+          />
+        </Typography>
+      </TheoryPanel>
     </SkillPaper>
   </Background>
 );
 
 SkillPage.propTypes = {
-  // category: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  theory: PropTypes.string.isRequired,
   // highlight: PropTypes.string,
 };
 
